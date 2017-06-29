@@ -1,0 +1,149 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: 0 auto;
+    width: 80vw;
+}
+
+h1 {
+    color: tan;
+    font-family: 'Spicy Rice', cursive;
+    font-weight: 100;
+    font-size: 4em;
+    text-align: center;
+    padding: 30px 0 50px 0;
+    text-shadow: 1px 1px 2px black, 0 0 25px tan, 0 0 5px chocolate;
+}
+
+header {
+    border-radius: 90px;
+}
+
+.container {
+    /*height: 100vh;*/
+    height: 900px;
+}
+
+audio {
+    padding: 20px;
+    width: 50vw;
+}
+
+.search {
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    background-color: #FFFFFF;
+    width: 40vw;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 30px;
+}
+
+input[type="button"] {
+    font-weight: 600;
+    padding: 1px 40px;
+    margin-left: 20px;
+    border: 2px solid gray;
+    border-radius: 30px;
+    background: tan;
+    box-shadow: 0 9px #999;
+}
+
+.submitBtn {
+    position: relative;
+    top: -4px;
+    font-family: 'Spicy Rice', cursive;
+    font-size: 1.5em;
+    font-weight: 100;
+    color: #FFFFFF;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.submitBtn:hover {
+    background: chocolate;
+}
+
+.submitBtn:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.results {
+    height: 700px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.track {
+    width: 20%;
+}
+
+p {
+    padding: 10px;
+}
+
+img {
+    width: 90%;
+}
+
+label {
+    text-align: center;
+}
+
+marquee {
+    color: chocolate;
+    width: 400px;
+}
+
+.results {
+    color: #FFFFFF;
+    margin-top: 30px;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("oldRadio.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.5;
+    filter: grayscale(.5);
+    z-index: -1;
+}
+
+#marquee {
+    color: tan;
+}
+
+/* Marquee tag is depricated in html5
+ need to redo later.*/
+marquee {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.artwork:hover {
+    cursor: pointer;
+    transform: rotate(3deg);
+}
