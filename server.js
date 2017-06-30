@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mustacheExpress = require('mustache-express');
+const models = require("./models");
 const port = 8000;
 
 var app = express();
@@ -16,13 +17,32 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/favorites', function (req, res) {
-  res.render('favorites');
+app.get("/favorites", function(req, res) {
+  models.favorites
+    .findAll()
+    .then(function(foundFavs) {
+    res.render("favorites", {tracks: foundFavs});
+  })
+  .catch(function(err) {
+    res.status(500).send(err);
+  });
 });
 
 app.post('/favorites', function(req, res) {
   console.log('SAVING to DB');
-  res.redirect('/');
+  // var favoriteData = req.body.item;
+  var newFav = models.favorites.build({ 
+    title: 'Johnny It\'s Cold Outside',
+    band: 'John Schneider, Tom Wopat' });
+  newFav
+    .save()
+    .then(function(savedFav) {
+      // res.send(savedTodo);
+      res.redirect("/");
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
 });
 
 

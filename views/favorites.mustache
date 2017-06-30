@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>SoundCloud Music Search</title>
+  <title>SoundCloud Music Favorites</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="The Iron Yard Project: Week 4 - Weekly Assignment">
@@ -31,6 +31,13 @@
       </form>
     </section>
     <section class="results">
+        {{#tracks}}
+          <div class="track" id="track-{{id}}" title="{{audio}}">
+            <img src={{artwork}} alt="" id="artwork-{{id}}" class="artwork">
+            <p id="title-{{id}}">{{title}}</p>
+            <p class="band">{{band}}</p>
+          </div>
+        {{/tracks}}
     </section>
   </div>
   <script src="main.js"></script>

@@ -10,8 +10,8 @@
 
 'use strict';
 
-const api = "http://api.soundcloud.com/tracks";
-const clientId = "?client_id=8538a1744a7fdaa59981232897501e04";
+const API = "http://api.soundcloud.com/tracks";
+const CLIENTID = "8538a1744a7fdaa59981232897501e04";
 
 var marqueeText = document.querySelector('marquee');
 var resultsSection = document.querySelector(".results");
@@ -22,8 +22,10 @@ document.querySelector('.submitBtn').addEventListener("click", function() {
 });  
 
 document.querySelector('.results').addEventListener("click", function(e) {
+    console.log("ALBUM PRESSED");
     var selectedId = e.target.id.replace("artwork-", "");
-    document.querySelector("audio").src = document.querySelector("#track-" + selectedId).title + clientId;
+    console.log('====', selectedId);
+    document.querySelector("audio").src = document.querySelector("#track-" + selectedId).title + "?client_id=" + CLIENTID;
     marqueeText.innerHTML = document.querySelector('#title-' + selectedId).innerHTML;
 });
 
@@ -41,7 +43,7 @@ document.querySelector('.search').addEventListener("submit", function() {
 function getMusic(artist) {
 
     resultsSection.innerHTML = "";
-    let url = api + clientId + "&q=%22" + artist + "%22";
+    let url = API + "?client_id=" + CLIENTID + "&q=%22" + artist + "%22";
 
     fetch(url).then(function(response) {
     // handle HTTP response
