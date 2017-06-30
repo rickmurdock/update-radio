@@ -1,20 +1,10 @@
-/*
-  Here is a guide for the steps you could take:
-*/
-// (function () {
-// 1. First select and store the elements you'll be working with
-// 2. Create your `onSubmit` event for getting the user's search term
-// 3. Create your `fetch` request that is called after a submission
-// 4. Create a way to append the fetch results to your page
-// 5. Create a way to listen for a click that will play the song in the audio play
-
 'use strict';
 
 const API = "http://api.soundcloud.com/tracks";
 const CLIENTID = "8538a1744a7fdaa59981232897501e04";
-
 var marqueeText = document.querySelector('marquee');
 var resultsSection = document.querySelector(".results");
+var tracks;
 
 document.querySelector('.submitBtn').addEventListener("click", function() {
     let artist = document.querySelector('#artistSearch').value
@@ -28,6 +18,14 @@ document.querySelector('.results').addEventListener("click", function(e) {
     document.querySelector("audio").src = document.querySelector("#track-" + selectedId).title + "?client_id=" + CLIENTID;
     marqueeText.innerHTML = document.querySelector('#title-' + selectedId).innerHTML;
 });
+
+// document.querySelector('#addFav').addEventListener("click", function(e) {
+//     console.log("FAV PRESSED");
+//     var selectedId = e.target.id;
+//     console.log('====', selectedId);
+//     console.log(savTitle);
+//     console.log('saved band ', savBand);
+// });
 
 document.querySelector("#artistSearch").addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -49,7 +47,8 @@ function getMusic(artist) {
     // handle HTTP response
         response.json().then(function(data) {  
             console.log("Here is the data:", data);
-            var tracks = data.results;
+            // var tracks = data.results;
+            tracks = data //.results;
             console.log(data.length);
             for (let i = 0; i < data.length; i++) {
                 createTrack(data, i);
@@ -66,6 +65,7 @@ function createTrack(tracks, i) {
     let band;
     let newDiv;
     let title;
+    let favBtn;
     
     newDiv = document.createElement('div');
     newDiv.className = 'track';
@@ -83,6 +83,14 @@ function createTrack(tracks, i) {
     artwork.className = 'artwork'
     newDiv.appendChild(artwork);
 
+    favBtn = document.createElement('button');
+    favBtn.innerHTML = 'add to favorites';
+    favBtn.id = i;
+    favBtn.className = 'favBtn';
+    favBtn.addEventListener("click", addFavoriteSong);
+    newDiv.appendChild(favBtn);
+
+
     title = document.createElement('p');
     title.innerHTML = tracks[i].title;
     title.id = 'title-' + i;
@@ -93,4 +101,15 @@ function createTrack(tracks, i) {
     band.id = 'band-' + i;
     band.className = 'band';
     newDiv.appendChild(band);
+}
+
+function addFavoriteSong (event) {
+    event.preventDefault();
+    event.target.disabled = true;
+    var selectedId = event.target.id;
+    var tracksData = tracks[selectedId];
+    console.log('tracksData: ', tracksData);
+    axios.post('/favorites', tracksData).then(function(addedSong) {
+        return addedSong.data;
+    });
 }

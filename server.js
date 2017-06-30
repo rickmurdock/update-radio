@@ -3,14 +3,17 @@ const bodyParser = require('body-parser');
 const mustacheExpress = require('mustache-express');
 const models = require("./models");
 const port = 8000;
-
 var app = express();
 
-// MIDDLEWARE
-app.use("/", express.static(__dirname + "/views"));
+// RENDER ENGINE
 app.engine("mustache", mustacheExpress());
 app.set("views", "./views");
 app.set("view engine", "mustache")
+
+// MIDDLEWARE
+app.use("/", express.static(__dirname + "/views"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES
 app.get('/', function(req, res) {
@@ -30,17 +33,21 @@ app.get("/favorites", function(req, res) {
 
 app.post('/favorites', function(req, res) {
   console.log('SAVING to DB');
-  // var favoriteData = req.body.item;
+  console.log("=========", req.body.band);
   var newFav = models.favorites.build({ 
-    title: 'Johnny It\'s Cold Outside',
-    band: 'John Schneider, Tom Wopat' });
+    title: req.body.title,
+    band: req.body.user.username });
+    // console.log(' band: req.body.band : ',  req.body.band );
+
+console.log("newfav", newFav);
   newFav
     .save()
     .then(function(savedFav) {
-      // res.send(savedTodo);
+      console.log('savedFav: ', savedFav);
       res.redirect("/");
     })
     .catch(function(err) {
+      // console.log('err: ', err);
       res.status(500).send(err);
     });
 });

@@ -19,12 +19,10 @@
     <section class="player">
       <audio class="music-player" controls="controls" autoplay src=""></audio>
       <br>
-      <form action="/favorites" enctype="multipart/form-data" method="post" id="eventForm" target="uploader_iframe">
       <div id="marquee">
-        Now Playing:&nbsp;&nbsp;<marquee>&nbsp;</marquee> <input type="submit" value="Save to Favorites" id='saveBtn'>
+        Now Playing:&nbsp;&nbsp;<marquee name="playing">&nbsp;</marquee>
       </div>
-      </form>
-      <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+    <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
       <br>
     </section>
     <section class="search">
@@ -36,6 +34,7 @@
     <section class="results">
     </section>
   </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
