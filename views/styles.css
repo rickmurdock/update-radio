@@ -156,12 +156,16 @@ marquee {
     
 }
 
-.favBtn, #addFav {
-    color: burlywood;
+.favBtn {
+    color: cornflowerblue;
     /*border: 1px solid mediumslateblue;*/
 }
 
 .nav {
-    color: chocolate;
+    color: cornflowerblue;
     font-size: 1.3em;
+}
+
+.favBtn:hover, .nav:hover {
+    color: lightseagreen;
 }
