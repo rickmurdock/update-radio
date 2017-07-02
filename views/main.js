@@ -12,20 +12,10 @@ document.querySelector('.submitBtn').addEventListener("click", function() {
 });  
 
 document.querySelector('.results').addEventListener("click", function(e) {
-    console.log("ALBUM PRESSED");
     var selectedId = e.target.id.replace("artwork-", "");
-    console.log('====', selectedId);
     document.querySelector("audio").src = document.querySelector("#track-" + selectedId).title + "?client_id=" + CLIENTID;
     marqueeText.innerHTML = document.querySelector('#title-' + selectedId).innerHTML;
 });
-
-// document.querySelector('#addFav').addEventListener("click", function(e) {
-//     console.log("FAV PRESSED");
-//     var selectedId = e.target.id;
-//     console.log('====', selectedId);
-//     console.log(savTitle);
-//     console.log('saved band ', savBand);
-// });
 
 document.querySelector("#artistSearch").addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -47,7 +37,6 @@ function getMusic(artist) {
     // handle HTTP response
         response.json().then(function(data) {  
             console.log("Here is the data:", data);
-            // var tracks = data.results;
             tracks = data //.results;
             console.log(data.length);
             for (let i = 0; i < data.length; i++) {
@@ -90,7 +79,6 @@ function createTrack(tracks, i) {
     favBtn.addEventListener("click", addFavoriteSong);
     newDiv.appendChild(favBtn);
 
-
     title = document.createElement('p');
     title.innerHTML = tracks[i].title;
     title.id = 'title-' + i;
@@ -108,8 +96,8 @@ function addFavoriteSong (event) {
     event.target.disabled = true;
     var selectedId = event.target.id;
     var tracksData = tracks[selectedId];
-    console.log('tracksData: ', tracksData);
+    console.log(tracksData);
     axios.post('/favorites', tracksData).then(function(addedSong) {
         return addedSong.data;
     });
-}
+};

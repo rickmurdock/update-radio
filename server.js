@@ -20,6 +20,10 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+// app.get('/search', function(req, res) {
+//   res.render('index');
+// });
+
 app.get("/favorites", function(req, res) {
   models.favorites
     .findAll()
@@ -32,26 +36,20 @@ app.get("/favorites", function(req, res) {
 });
 
 app.post('/favorites', function(req, res) {
-  console.log('SAVING to DB');
-  console.log("=========", req.body.band);
   var newFav = models.favorites.build({ 
+    audio: req.body.stream_url,
+    artwork: req.body.artwork_url,
     title: req.body.title,
     band: req.body.user.username });
-    // console.log(' band: req.body.band : ',  req.body.band );
-
-console.log("newfav", newFav);
   newFav
     .save()
     .then(function(savedFav) {
-      console.log('savedFav: ', savedFav);
       res.redirect("/");
     })
     .catch(function(err) {
-      // console.log('err: ', err);
       res.status(500).send(err);
     });
 });
-
 
 // LISTENER
 app.listen(port, function() {

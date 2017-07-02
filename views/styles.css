@@ -158,5 +158,10 @@ marquee {
 
 .favBtn, #addFav {
     color: burlywood;
-    border: 1px solid mediumslateblue;
+    /*border: 1px solid mediumslateblue;*/
+}
+
+.nav {
+    color: chocolate;
+    font-size: 1.3em;
 }

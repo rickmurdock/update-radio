@@ -20,20 +20,30 @@
       <audio class="music-player" controls="controls" autoplay src=""></audio>
       <br>
       <div id="marquee">
-        Now Playing:&nbsp;&nbsp;<marquee>&nbsp;</marquee>
+        Now Playing:&nbsp;&nbsp;<marquee>&nbsp;</marquee>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/" class="nav">Return to Search</a>
       </div>
       <br>
     </section>
     <section class="search">
-      <form class="search-form">
-        <input type="text" id="artistSearch" placeholder="Search for Artist" name="artistSearch" value="">
-        <input type="button" class="submitBtn" value="Search">
-      </form>
+      <!--<form class="search-form">-->
+      <!--<form action="" method="get">-->
+        <!--<input type="text" id="artistSearch" placeholder="Search for Artist" name="artistSearch" value="">-->
+        <!--<input type="button" class="submitBtn" value="Search">-->
+        <input type="hidden" id="artistSearch" name="artistSearch" value="">
+        <input type="hidden" class="submitBtn" value="Search">
+        <a href="/">Return to Search</a>
+      <!--</form>-->
     </section>
     <section class="results">
         {{#tracks}}
           <div class="track" id="track-{{id}}" title="{{audio}}">
-            <img src={{artwork}} alt="" id="artwork-{{id}}" class="artwork">
+            {{#artwork}}
+              <img src={{artwork}} alt="" id="artwork-{{id}}" class="artwork">
+            {{/artwork}}
+            {{^artwork}}
+              <img src="noImage.png" alt="" id="artwork-{{id}}" class="artwork">
+            {{/artwork}}
             <p id="title-{{id}}">{{title}}</p>
             <p class="band">{{band}}</p>
           </div>
